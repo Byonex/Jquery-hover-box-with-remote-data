@@ -37,6 +37,8 @@ var loaded = "defined";
                 .appendTo("head");
         }
 		var loaded = "non";
+							$(this).addClass('hovercard');
+ 
 				        $(this)
             .mouseenter(function() {
                 var offset = $(this)
@@ -108,6 +110,7 @@ var loaded = "defined";
 				/*console.log(loaded);*/
 				if(loaded == "non"){
 					$('.hovercardShow').hide().remove();
+					loaded = "non";
 					return this;
 				}
 				
@@ -131,14 +134,14 @@ var loaded = "defined";
             hovercardShow: false
         };
 
-        $(this, '.hovercardShow')
+        $('.hovercard, .hovercardShow')
             .mouseover(function() {
                 inArr[$(this)
                     .attr('class')] = true;
             });
 
 
-        $(this, '.hovercardShow')
+        $('.hovercard, .hovercardShow')
             .mouseout(function() {
                 inArr[$(this)
                     .attr('class')] = false;
