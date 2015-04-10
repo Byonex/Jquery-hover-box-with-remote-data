@@ -2,11 +2,43 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<title>Jquery hovercard by Tom Gibbs</title>
+<style>
+.codebox {
+    border:1px solid black;
+    background-color:gray;
+    width:300px;
+    overflow:auto;
+    color:#fff;
+</style>
 </head>
 
 <body>
 Out of lack of Jquery hovercard plugins, I decided to make one. Simple to use, and pretty customisable.<br>
-To view usage and docs, visit <a hef="http://byonex.co.uk/projects/hovercards">this page</a>
+To view usage and docs, visit <a hef="http://byonex.co.uk/projects/hovercards">this page</a><br>
+<br>
+Basic usage:<br>
+Add Jquery to the head of your site, followed by this plugin. To use it, simply put this at the bottom of your page:<br>
+<br>
+<div class="codebox">&lt;script&gt;<br>
+  $(&quot;.hovercard&quot;).tghovercard({<br>
+delayShow: &quot;300&quot;,<br>
+delayHide: &quot;300&quot;,<br>
+height: &quot;150&quot;,<br>
+fadeOut: &quot;300&quot;,<br>
+fadeIn: &quot;300&quot;,<br>
+defaultcss: &quot;yes&quot;,<br>
+url: &quot;/hovercards.php?user=&quot;,<br>
+top: &quot;30&quot;,<br>
+menuHeight: &quot;40&quot;<br>
+});<br>
+&lt;/script&gt;</div>
+To get data from a remote file, change the option "url" value to the file that gets the remote data. Using a GET variable at the end (like the default setting for url uses) allows you to load different data, depending on a data attribute in your link.<br>
+For example, in this link, you can see "data-uid" has a value of "1". The plugin will attach that value to the end of the "url" option. The page/script you link to can access the GET variable and post back any information based on the variable
+<br>
+<div class="codebox">
+&lt;a href=&quot;/index&quot; class=&quot;hovercard&quot; data-uid=&quot;1&quot;&gt;User 1&lt;/a&gt;
+</div>
+<a href="http://byonex.co.uk/projects/hovercard">Visit the website</a> for a detailed example on usage.
 </body>
 </html>

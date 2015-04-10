@@ -8,14 +8,16 @@
             delayShow: "300",
             delayHide: "300",
             height: "150",
+			width: "300",
             fadeOut: "300",
             fadeIn: "300",
             defaultcss: "yes",
             url: "/hovercards.php?user=",
             top: "30",
-            menuHeight: "0",
+			menuHeight: "0",
+			calculation: "left",
         }, options);
-
+var loaded = "defined";
 
         //defualt CSS if set to true
         if (settings.defaultcss == 'yes') {
@@ -34,23 +36,40 @@
                 )
                 .appendTo("head");
         }
-
-        $(this)
+		var loaded = "non";
+				        $(this)
             .mouseenter(function() {
                 var offset = $(this)
                     .offset();
                 var top = offset.top - $(window)
                     .scrollTop();
-                var left = offset.left - $(window)
+					var left2 = offset.left - $(window)
                     .scrollLeft();
-                console.log(top);
+                var left = $(this).offset().left - $(this).parent().offset().left - $(this).parent().scrollLeft();
+                	var p = $(this);
+					var position = p.position();
+					var positionL = position.left;
+
+                /*console.log(top);
+				console.log(left);
+				console.log(p);
+				console.log(position);
+				console.log(positionL);*/
 
                 var margin = parseInt(settings.height) + parseInt(
                     settings.top);
-                var marginMenu = parseInt(margin) + parseInt(
-                    settings.menuHeight);
-
-                //Checks to see if a hover card already is open to avoid multiple hovercards on screen at once
+				var marginMenu = parseInt(margin)+parseInt(settings.menuHeight);
+				if (settings.calculation == 'left'){
+				var marg = $(this).offset().left - $(this).parent().offset().left - $(this).parent().scrollLeft();
+			}
+			else{
+				marg = offset.left - $(window)
+                    .scrollLeft();
+			}
+			
+			
+	
+			                //Checks to see if a hover card already is open to avoid multiple hovercards on screen at once
                 if ($('.hovercardShow')
                     .length) {}
                 else {
@@ -61,7 +80,7 @@
                                 '<div class="hovercardShow" style="height:' +
                                 settings.height + 'px;margin-top:-' +
                                 margin +
-                                'px;width:300px;position:absolute;z-index:1000;display:none;">Loading...</div>'
+                                'px;width:'+settings.width+'px;position:absolute;z-index:1000;display:none;left:'+marg+'px;">Loading...</div>'
                             )
                     }
                     else {
@@ -69,10 +88,30 @@
                             .append(
                                 '<div class="hovercardShow" style="height:' +
                                 settings.height +
-                                'px;margin-top:10px;width:300px;position:absolute;z-index:1000;display:none;">Loading...</div>'
+                                'px;margin-top:10px;width:'+settings.width+'px;position:absolute;z-index:1000;display:none;left:'+marg+'px;">Loading...</div>'
                             )
                     }
                 }
+				
+				loaded = "non";
+				
+			setTimeout(
+  function() 
+  {
+	 
+     loaded = "oui";
+	  
+  }, settings.delayShow);
+  $(this)
+            .mouseout(function() {
+				
+				/*console.log(loaded);*/
+				if(loaded == "non"){
+					$('.hovercardShow').hide().remove();
+					return this;
+				}
+				
+			}); 
 
                 $('.hovercardShow')
                     .delay(settings.delayShow)
@@ -81,21 +120,25 @@
                     .load(settings.url + $(this)
                         .data("uid"));
                 return this;
+				var inArr = {
+            hovercard: false,
+            hovercardShow: false
+        };
             });
-
+			
         var inArr = {
             hovercard: false,
             hovercardShow: false
         };
 
-        $('.hovercard, .hovercardShow')
+        $(this, '.hovercardShow')
             .mouseover(function() {
                 inArr[$(this)
                     .attr('class')] = true;
             });
 
 
-        $('.hovercard, .hovercardShow')
+        $(this, '.hovercardShow')
             .mouseout(function() {
                 inArr[$(this)
                     .attr('class')] = false;
