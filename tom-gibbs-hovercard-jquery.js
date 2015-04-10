@@ -1,6 +1,5 @@
 //Free to use Jquery hovercard/hoverbox plugin by Tom Gibbs http://byonex.co.uk/projects/hovercard
 (function($) {
-
     $.fn.tghovercard = function(options) {
 
         // Default options
