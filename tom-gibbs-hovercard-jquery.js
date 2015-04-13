@@ -37,6 +37,7 @@ var loaded = "defined";
         }
 		var loaded = "non";
 							$(this).addClass('hovercard');
+							$('.hovercard').wrap('<div style="display:inline-block;position:relative;" class="hovercard"></div>');
  
 				        $(this)
             .mouseenter(function() {
@@ -50,12 +51,11 @@ var loaded = "defined";
                 	var p = $(this);
 					var position = p.position();
 					var positionL = position.left;
-
-                /*console.log(top);
+				console.log(top);
 				console.log(left);
 				console.log(p);
 				console.log(position);
-				console.log(positionL);*/
+				console.log(positionL);
 
                 var margin = parseInt(settings.height) + parseInt(
                     settings.top);
@@ -106,7 +106,7 @@ var loaded = "defined";
   $(this)
             .mouseout(function() {
 				
-				/*console.log(loaded);*/
+				console.log(loaded);
 				if(loaded == "non"){
 					$('.hovercardShow').hide().remove();
 					loaded = "non";
@@ -121,6 +121,7 @@ var loaded = "defined";
                 $('.hovercardShow')
                     .load(settings.url + $(this)
                         .data("uid"));
+
                 return this;
 				var inArr = {
             hovercard: false,
@@ -134,14 +135,14 @@ var loaded = "defined";
         };
 
         $('.hovercard, .hovercardShow')
-            .mouseover(function() {
+            .mouseenter(function() {
                 inArr[$(this)
                     .attr('class')] = true;
             });
 
 
         $('.hovercard, .hovercardShow')
-            .mouseout(function() {
+            .mouseleave(function() {
                 inArr[$(this)
                     .attr('class')] = false;
 
